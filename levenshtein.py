@@ -8,7 +8,7 @@ and also for more info:
     http://www.yorku.ca/mack/CHI01a.PDF
     https://en.m.wikipedia.org/wiki/Precision_and_recall
 
-Used With California Polythechnic University California, Pomona Voice Assitant Project
+Used With California Polythechnic University California, Pomona Voice Assistant Project
 Author: Christopher Leal
 Project Manager: Gerry Fernando Patia
 Date: 24 May, 2018
