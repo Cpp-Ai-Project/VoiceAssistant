@@ -1,3 +1,14 @@
+'''
+
+This is another example using the TensorFlow library
+to implement a neural network with the MNIST data set.
+Even with 500 iterations, this model achieves much
+better accuracy (sometimes quicker) than the deep
+net model. Again, 28x28-pixel representations of
+numbers 0-9 are used.
+
+'''
+
 import tensorflow as tf
 from tensorflow.contrib import rnn
 
@@ -26,7 +37,8 @@ out_bias = tf.Variable(tf.random_normal([n_classes]))
 x = tf.placeholder("float",[None,time_steps,n_input])
 y = tf.placeholder("float",[None,n_classes])
 
-#process the input tensor from [batch_size,n_steps,n_input] to "time_steps" number of [batch_size,n_input] tensors
+#process the input tensor from [batch_size,n_steps,n_input] to 
+#"time_steps" number of [batch_size,n_input] tensors
 input = tf.unstack(x ,time_steps,1)
 
 #defining the network
@@ -35,7 +47,8 @@ outputs,_ = rnn.static_rnn(lstm_layer,input,dtype="float32")
 
 #train network
 def train_neural_network(x):
-	#run last output through recurrent network to find next prediction, i.e. (output)(weight) + bias
+	#run last output through recurrent network to find next prediction,
+	#i.e. (output)(weight) + bias
 	prediction = tf.matmul(outputs[-1],out_weights)+out_bias
 
 	#calculate cost w/softmax (used to optimize model)
