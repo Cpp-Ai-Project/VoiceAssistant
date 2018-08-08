@@ -1,0 +1,279 @@
+Microsoft Windows [Version 10.0.17134.165]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\Jason Chang>cd C:\Users\Jason Chang\Documents\GitHub\cppai\exp\JC\STT
+
+C:\Users\Jason Chang\Documents\GitHub\cppai\exp\JC\STT>python train_ctc_voxforge_test_sparse.py
+2018-08-06 20:03:08.589050: I C:\tf_jenkins\workspace\rel-win\M\windows\PY\35\tensorflow\core\platform\cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
+Epoch 0/150, train_cost = 466.601, train_ler = 0.955, valid_cost = 165.534, valid_ler = 0.891, time = 7.288
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: e e  t
+
+Validation decoding:
+Original: and theres no chivalry no quarter shown in this fight lord fitzhugh is the key to the whole situation it seemed nearer to him since he had seen and talked with gregson her own betrayal of herself was like tonic to philip
+Decoded:  e e e t t e e e t e  t t e e
+
+Epoch 1/150, train_cost = 155.235, train_ler = 0.959, valid_cost = 209.388, valid_ler = 0.987, time = 6.454
+Epoch 2/150, train_cost = 180.857, train_ler = 0.947, valid_cost = 170.662, valid_ler = 0.968, time = 6.264
+Epoch 3/150, train_cost = 163.149, train_ler = 0.927, valid_cost = 135.885, valid_ler = 0.922, time = 6.405
+Epoch 4/150, train_cost = 139.329, train_ler = 0.956, valid_cost = 132.869, valid_ler = 0.973, time = 16.190
+Epoch 5/150, train_cost = 134.934, train_ler = 0.946, valid_cost = 132.420, valid_ler = 0.937, time = 15.189
+Epoch 6/150, train_cost = 133.592, train_ler = 0.917, valid_cost = 132.002, valid_ler = 0.935, time = 6.517
+Epoch 7/150, train_cost = 132.467, train_ler = 0.933, valid_cost = 131.508, valid_ler = 0.957, time = 6.133
+Epoch 8/150, train_cost = 131.628, train_ler = 0.960, valid_cost = 130.937, valid_ler = 0.961, time = 6.525
+Epoch 9/150, train_cost = 130.921, train_ler = 0.960, valid_cost = 130.360, valid_ler = 0.957, time = 10.333
+Epoch 10/150, train_cost = 130.367, train_ler = 0.963, valid_cost = 129.849, valid_ler = 0.958, time = 12.875
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded:  e  e h
+
+Validation decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded:  e  e h
+
+Epoch 11/150, train_cost = 129.880, train_ler = 0.953, valid_cost = 129.362, valid_ler = 0.951, time = 6.348
+Epoch 12/150, train_cost = 129.443, train_ler = 0.954, valid_cost = 128.921, valid_ler = 0.958, time = 6.711
+Epoch 13/150, train_cost = 129.060, train_ler = 0.943, valid_cost = 128.514, valid_ler = 0.947, time = 13.027
+Epoch 14/150, train_cost = 128.710, train_ler = 0.946, valid_cost = 128.162, valid_ler = 0.941, time = 7.451
+Epoch 15/150, train_cost = 128.333, train_ler = 0.937, valid_cost = 127.825, valid_ler = 0.931, time = 6.611
+Epoch 16/150, train_cost = 128.021, train_ler = 0.935, valid_cost = 127.432, valid_ler = 0.930, time = 10.609
+Epoch 17/150, train_cost = 127.522, train_ler = 0.929, valid_cost = 126.948, valid_ler = 0.932, time = 14.880
+Epoch 18/150, train_cost = 127.198, train_ler = 0.928, valid_cost = 126.392, valid_ler = 0.920, time = 10.196
+Epoch 19/150, train_cost = 126.585, train_ler = 0.909, valid_cost = 126.086, valid_ler = 0.902, time = 14.156
+Epoch 20/150, train_cost = 126.231, train_ler = 0.896, valid_cost = 125.710, valid_ler = 0.889, time = 15.554
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded:  e e e e e tn e e e e e e e e
+
+Validation decoding:
+Original: macdougall my engineer believes it it is growing every day every hour now you understand you have associated with some of these men
+Decoded:  e eno e e t e e e
+
+Epoch 21/150, train_cost = 125.659, train_ler = 0.887, valid_cost = 125.281, valid_ler = 0.883, time = 10.619
+Epoch 22/150, train_cost = 125.415, train_ler = 0.884, valid_cost = 124.891, valid_ler = 0.877, time = 16.152
+Epoch 23/150, train_cost = 124.840, train_ler = 0.875, valid_cost = 124.426, valid_ler = 0.875, time = 11.710
+Epoch 24/150, train_cost = 124.494, train_ler = 0.867, valid_cost = 123.990, valid_ler = 0.867, time = 15.183
+Epoch 25/150, train_cost = 124.011, train_ler = 0.867, valid_cost = 123.519, valid_ler = 0.871, time = 11.265
+Epoch 26/150, train_cost = 123.579, train_ler = 0.865, valid_cost = 123.092, valid_ler = 0.865, time = 11.748
+Epoch 27/150, train_cost = 123.136, train_ler = 0.868, valid_cost = 122.632, valid_ler = 0.859, time = 15.021
+Epoch 28/150, train_cost = 122.711, train_ler = 0.854, valid_cost = 122.198, valid_ler = 0.849, time = 15.338
+Epoch 29/150, train_cost = 122.226, train_ler = 0.852, valid_cost = 121.661, valid_ler = 0.853, time = 15.468
+Epoch 30/150, train_cost = 121.834, train_ler = 0.843, valid_cost = 122.681, valid_ler = 0.836, time = 15.679
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded:  e e e e e e e e e tne n e s e e e t e  e
+
+Validation decoding:
+Original: macdougall my engineer believes it it is growing every day every hour now you understand you have associated with some of these men
+Decoded: o e ni e e tion e e e e
+
+Epoch 31/150, train_cost = 123.411, train_ler = 0.856, valid_cost = 125.032, valid_ler = 0.856, time = 11.522
+Epoch 32/150, train_cost = 126.117, train_ler = 0.837, valid_cost = 124.757, valid_ler = 0.815, time = 13.841
+Epoch 33/150, train_cost = 123.727, train_ler = 0.851, valid_cost = 125.078, valid_ler = 0.892, time = 15.191
+Epoch 34/150, train_cost = 122.848, train_ler = 0.856, valid_cost = 120.951, valid_ler = 0.854, time = 15.326
+Epoch 35/150, train_cost = 121.100, train_ler = 0.844, valid_cost = 120.220, valid_ler = 0.842, time = 16.358
+Epoch 36/150, train_cost = 120.464, train_ler = 0.834, valid_cost = 119.589, valid_ler = 0.825, time = 15.051
+Epoch 37/150, train_cost = 119.657, train_ler = 0.823, valid_cost = 119.027, valid_ler = 0.813, time = 16.242
+Epoch 38/150, train_cost = 118.939, train_ler = 0.822, valid_cost = 118.211, valid_ler = 0.820, time = 16.678
+Epoch 39/150, train_cost = 118.207, train_ler = 0.820, valid_cost = 117.425, valid_ler = 0.806, time = 15.524
+Epoch 40/150, train_cost = 117.395, train_ler = 0.814, valid_cost = 116.644, valid_ler = 0.812, time = 16.113
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: e t e eie e e e e tine n e s e tit t e e
+
+Validation decoding:
+Original: and theres no chivalry no quarter shown in this fight lord fitzhugh is the key to the whole situation it seemed nearer to him since he had seen and talked with gregson her own betrayal of herself was like tonic to philip
+Decoded: e e e o e e s o e t e e e e t o e  e e a a  a a i
+
+Epoch 41/150, train_cost = 116.630, train_ler = 0.807, valid_cost = 115.785, valid_ler = 0.810, time = 15.672
+Epoch 42/150, train_cost = 115.710, train_ler = 0.793, valid_cost = 114.941, valid_ler = 0.798, time = 11.062
+Epoch 43/150, train_cost = 115.058, train_ler = 0.794, valid_cost = 114.254, valid_ler = 0.798, time = 13.361
+Epoch 44/150, train_cost = 114.174, train_ler = 0.796, valid_cost = 113.250, valid_ler = 0.789, time = 16.224
+Epoch 45/150, train_cost = 113.441, train_ler = 0.785, valid_cost = 112.763, valid_ler = 0.785, time = 16.394
+Epoch 46/150, train_cost = 112.725, train_ler = 0.775, valid_cost = 112.040, valid_ler = 0.770, time = 17.233
+Epoch 47/150, train_cost = 112.830, train_ler = 0.774, valid_cost = 112.256, valid_ler = 0.790, time = 15.825
+Epoch 48/150, train_cost = 112.427, train_ler = 0.754, valid_cost = 110.353, valid_ler = 0.762, time = 12.344
+Epoch 49/150, train_cost = 110.915, train_ler = 0.736, valid_cost = 111.168, valid_ler = 0.731, time = 11.826
+Epoch 50/150, train_cost = 111.259, train_ler = 0.741, valid_cost = 110.274, valid_ler = 0.727, time = 16.997
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: e tie e eie e o e tnae n d s s ie tite t s s h  e e t e da e
+
+Validation decoding:
+Original: and theres no chivalry no quarter shown in this fight lord fitzhugh is the key to the whole situation it seemed nearer to him since he had seen and talked with gregson her own betrayal of herself was like tonic to philip
+Decoded: d e e o e e s owi t tue s eite esi e e eo in a enadaeo a a s w eo oe i
+
+Epoch 51/150, train_cost = 110.184, train_ler = 0.753, valid_cost = 108.771, valid_ler = 0.746, time = 18.133
+Epoch 52/150, train_cost = 108.798, train_ler = 0.719, valid_cost = 106.503, valid_ler = 0.717, time = 15.008
+Epoch 53/150, train_cost = 106.940, train_ler = 0.722, valid_cost = 105.259, valid_ler = 0.731, time = 16.487
+Epoch 54/150, train_cost = 105.750, train_ler = 0.713, valid_cost = 105.680, valid_ler = 0.727, time = 17.286
+Epoch 55/150, train_cost = 105.173, train_ler = 0.712, valid_cost = 103.713, valid_ler = 0.745, time = 16.106
+Epoch 56/150, train_cost = 103.231, train_ler = 0.693, valid_cost = 101.563, valid_ler = 0.684, time = 18.535
+Epoch 57/150, train_cost = 102.194, train_ler = 0.665, valid_cost = 99.915, valid_ler = 0.671, time = 16.001
+Epoch 58/150, train_cost = 100.115, train_ler = 0.677, valid_cost = 98.785, valid_ler = 0.661, time = 13.631
+Epoch 59/150, train_cost = 98.571, train_ler = 0.661, valid_cost = 97.310, valid_ler = 0.662, time = 17.773
+Epoch 60/150, train_cost = 97.162, train_ler = 0.654, valid_cost = 95.333, valid_ler = 0.650, time = 12.561
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: e t had eie he s o te t ae n ey s hi ie hite t i wse i h hi to t t e das s n
+
+Validation decoding:
+Original: he moved away as quietly as he had come the girl faced him her eyes shining with sudden fear close beside him gleamed the white fangs of the wolfdog he looked at the handkerchief more closely
+Decoded:  oe a a s iedy s e ume tid h e enini h sden aeo e ne h e oad oeod t h eanae eo
+
+Epoch 61/150, train_cost = 95.337, train_ler = 0.633, valid_cost = 93.778, valid_ler = 0.657, time = 15.219
+Epoch 62/150, train_cost = 93.709, train_ler = 0.616, valid_cost = 92.187, valid_ler = 0.627, time = 14.715
+Epoch 63/150, train_cost = 92.556, train_ler = 0.606, valid_cost = 91.347, valid_ler = 0.620, time = 14.032
+Epoch 64/150, train_cost = 91.604, train_ler = 0.607, valid_cost = 90.667, valid_ler = 0.592, time = 18.020
+Epoch 65/150, train_cost = 91.191, train_ler = 0.594, valid_cost = 89.005, valid_ler = 0.572, time = 17.581
+Epoch 66/150, train_cost = 88.857, train_ler = 0.584, valid_cost = 87.374, valid_ler = 0.595, time = 17.976
+Epoch 67/150, train_cost = 87.241, train_ler = 0.562, valid_cost = 84.692, valid_ler = 0.572, time = 13.356
+Epoch 68/150, train_cost = 85.205, train_ler = 0.574, valid_cost = 84.403, valid_ler = 0.591, time = 17.130
+Epoch 69/150, train_cost = 83.908, train_ler = 0.564, valid_cost = 83.577, valid_ler = 0.561, time = 6.896
+Epoch 70/150, train_cost = 85.056, train_ler = 0.569, valid_cost = 83.340, valid_ler = 0.577, time = 17.616
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: h s ti had erie hedes o the teemad n eya s se e hitoe t ot we cithi hi e o th ae wldsesy n
+
+Validation decoding:
+Original: and theres no chivalry no quarter shown in this fight lord fitzhugh is the key to the whole situation it seemed nearer to him since he had seen and talked with gregson her own betrayal of herself was like tonic to philip
+Decoded: d e no had ar seoni as toh tie s ete the wolesitio ed ereoice d enad ale  w talao hes e toi toehih
+
+Epoch 71/150, train_cost = 87.812, train_ler = 0.565, valid_cost = 84.334, valid_ler = 0.581, time = 15.014
+Epoch 72/150, train_cost = 85.247, train_ler = 0.562, valid_cost = 82.037, valid_ler = 0.564, time = 17.723
+Epoch 73/150, train_cost = 84.780, train_ler = 0.563, valid_cost = 84.145, valid_ler = 0.601, time = 18.686
+Epoch 74/150, train_cost = 84.634, train_ler = 0.578, valid_cost = 81.154, valid_ler = 0.576, time = 13.924
+Epoch 75/150, train_cost = 80.503, train_ler = 0.546, valid_cost = 78.462, valid_ler = 0.564, time = 17.167
+Epoch 76/150, train_cost = 78.353, train_ler = 0.514, valid_cost = 77.107, valid_ler = 0.508, time = 19.500
+Epoch 77/150, train_cost = 79.155, train_ler = 0.515, valid_cost = 76.995, valid_ler = 0.512, time = 18.390
+Epoch 78/150, train_cost = 78.273, train_ler = 0.526, valid_cost = 74.809, valid_ler = 0.529, time = 13.911
+Epoch 79/150, train_cost = 75.536, train_ler = 0.506, valid_cost = 73.148, valid_ler = 0.539, time = 17.111
+Epoch 80/150, train_cost = 72.534, train_ler = 0.475, valid_cost = 69.198, valid_ler = 0.470, time = 21.093
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: h stm hadg rie he eneso the taeemade n ey s h aed e hiteore t ot seped bac iohi hia mt of the ae i wold sea ayan
+
+Validation decoding:
+Original: and theres no chivalry no quarter shown in this fight lord fitzhugh is the key to the whole situation it seemed nearer to him since he had seen and talked with gregson her own betrayal of herself was like tonic to philip
+Decoded: d he o haldr edar e showni is toht tugh s e e the wole sitio emd e er o ihine h d sen n ale eonr wn etayal of hersel wa e toi to phie
+
+Epoch 81/150, train_cost = 72.448, train_ler = 0.479, valid_cost = 72.048, valid_ler = 0.512, time = 20.544
+Epoch 82/150, train_cost = 72.907, train_ler = 0.477, valid_cost = 69.097, valid_ler = 0.483, time = 14.537
+Epoch 83/150, train_cost = 69.988, train_ler = 0.450, valid_cost = 69.774, valid_ler = 0.481, time = 19.580
+Epoch 84/150, train_cost = 69.716, train_ler = 0.432, valid_cost = 65.849, valid_ler = 0.454, time = 19.098
+Epoch 85/150, train_cost = 66.586, train_ler = 0.408, valid_cost = 63.470, valid_ler = 0.424, time = 19.293
+Epoch 86/150, train_cost = 66.315, train_ler = 0.440, valid_cost = 62.339, valid_ler = 0.417, time = 19.891
+Epoch 87/150, train_cost = 62.971, train_ler = 0.417, valid_cost = 59.555, valid_ler = 0.419, time = 17.127
+Epoch 88/150, train_cost = 59.931, train_ler = 0.379, valid_cost = 57.409, valid_ler = 0.398, time = 19.197
+Epoch 89/150, train_cost = 57.870, train_ler = 0.359, valid_cost = 54.750, valid_ler = 0.361, time = 16.242
+Epoch 90/150, train_cost = 55.263, train_ler = 0.355, valid_cost = 53.713, valid_ler = 0.367, time = 18.470
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: it tim hand ied the eges th taihe made no rely a h aed e hiteoreto olipd dped back itohi chari ot of the ae it wld eaiamd
+
+Validation decoding:
+Original: macdougall my engineer believes it it is growing every day every hour now you understand you have associated with some of these men
+Decoded: madoualmy ngne elies tit is rowi ery y ey houoyou ndersand socated wit soe men
+
+Epoch 91/150, train_cost = 53.680, train_ler = 0.309, valid_cost = 50.790, valid_ler = 0.323, time = 9.973
+Epoch 92/150, train_cost = 51.827, train_ler = 0.325, valid_cost = 52.079, valid_ler = 0.335, time = 20.429
+Epoch 93/150, train_cost = 52.411, train_ler = 0.306, valid_cost = 50.453, valid_ler = 0.335, time = 16.768
+Epoch 94/150, train_cost = 50.230, train_ler = 0.285, valid_cost = 48.070, valid_ler = 0.288, time = 22.524
+Epoch 95/150, train_cost = 48.369, train_ler = 0.299, valid_cost = 45.490, valid_ler = 0.295, time = 15.791
+Epoch 96/150, train_cost = 46.330, train_ler = 0.273, valid_cost = 44.078, valid_ler = 0.290, time = 22.320
+Epoch 97/150, train_cost = 44.873, train_ler = 0.253, valid_cost = 43.517, valid_ler = 0.272, time = 15.974
+Epoch 98/150, train_cost = 43.304, train_ler = 0.227, valid_cost = 39.922, valid_ler = 0.238, time = 17.584
+Epoch 99/150, train_cost = 41.007, train_ler = 0.230, valid_cost = 38.739, valid_ler = 0.221, time = 16.725
+Epoch 100/150, train_cost = 38.983, train_ler = 0.227, valid_cost = 36.777, valid_ler = 0.232, time = 19.657
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: it sim hand gried the edges of the talehe made no rely ashwaed fod whiteore to oeilipdroped back into his chairisot of the game it would besly md
+
+Validation decoding:
+Original: and theres no chivalry no quarter shown in this fight lord fitzhugh is the key to the whole situation it seemed nearer to him since he had seen and talked with gregson her own betrayal of herself was like tonic to philip
+Decoded: an here no chivalry uar e shownin his fitor ftihugh is th e to the whole sitationt semed nearer o i ince eh had sen nd tale h gegsonr wn etrayal of herself was lke tonic to philip
+
+Epoch 101/150, train_cost = 37.653, train_ler = 0.215, valid_cost = 35.574, valid_ler = 0.238, time = 21.785
+Epoch 102/150, train_cost = 36.340, train_ler = 0.207, valid_cost = 38.041, valid_ler = 0.239, time = 17.566
+Epoch 103/150, train_cost = 38.400, train_ler = 0.200, valid_cost = 35.107, valid_ler = 0.204, time = 20.990
+Epoch 104/150, train_cost = 35.812, train_ler = 0.187, valid_cost = 33.140, valid_ler = 0.173, time = 18.110
+Epoch 105/150, train_cost = 33.595, train_ler = 0.175, valid_cost = 31.861, valid_ler = 0.203, time = 16.494
+Epoch 106/150, train_cost = 32.235, train_ler = 0.171, valid_cost = 30.486, valid_ler = 0.185, time = 17.171
+Epoch 107/150, train_cost = 30.448, train_ler = 0.153, valid_cost = 29.184, valid_ler = 0.151, time = 15.064
+Epoch 108/150, train_cost = 29.234, train_ler = 0.139, valid_cost = 27.314, valid_ler = 0.132, time = 22.121
+Epoch 109/150, train_cost = 27.534, train_ler = 0.146, valid_cost = 25.891, valid_ler = 0.153, time = 22.148
+Epoch 110/150, train_cost = 26.188, train_ler = 0.125, valid_cost = 26.021, valid_ler = 0.143, time = 17.660
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: his silim hands gried the eges of the tablehe madedno reply as h wated for hiteore to copilipdroped back into his chairi i sot of the game it would besesly made
+
+Validation decoding:
+Original: he moved away as quietly as he had come the girl faced him her eyes shining with sudden fear close beside him gleamed the white fangs of the wolfdog he looked at the handkerchief more closely
+Decoded: he moved away as qiely as he had comethe girlyaed him her eyey shin ith suden eaos bsde him gleamed the white fangs o t oldogloked at the handkerchief more closey
+
+Epoch 111/150, train_cost = 25.232, train_ler = 0.109, valid_cost = 23.897, valid_ler = 0.117, time = 18.089
+Epoch 112/150, train_cost = 23.951, train_ler = 0.093, valid_cost = 22.457, valid_ler = 0.098, time = 19.564
+Epoch 113/150, train_cost = 22.798, train_ler = 0.093, valid_cost = 23.575, valid_ler = 0.099, time = 20.680
+Epoch 114/150, train_cost = 23.654, train_ler = 0.120, valid_cost = 28.420, valid_ler = 0.162, time = 20.436
+Epoch 115/150, train_cost = 25.864, train_ler = 0.104, valid_cost = 24.452, valid_ler = 0.126, time = 21.878
+Epoch 116/150, train_cost = 25.982, train_ler = 0.113, valid_cost = 27.168, valid_ler = 0.148, time = 20.658
+Epoch 117/150, train_cost = 29.608, train_ler = 0.136, valid_cost = 27.910, valid_ler = 0.167, time = 21.053
+Epoch 118/150, train_cost = 29.996, train_ler = 0.146, valid_cost = 26.184, valid_ler = 0.175, time = 21.212
+Epoch 119/150, train_cost = 25.803, train_ler = 0.116, valid_cost = 24.494, valid_ler = 0.124, time = 19.209
+Epoch 120/150, train_cost = 23.816, train_ler = 0.101, valid_cost = 20.633, valid_ler = 0.103, time = 22.171
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: his slim hands gried the edges of the tablehe made no reply as he wated for whitemore to cophili roed bak into i chairi i sout of the game iteould besesly made
+
+Validation decoding:
+Original: macdougall my engineer believes it it is growing every day every hour now you understand you have associated with some of these men
+Decoded: macdougal my enginer believes itit is growing every da ery hounow you nderstadoyo ae sociated wih soe o hse men
+
+Epoch 121/150, train_cost = 21.026, train_ler = 0.077, valid_cost = 19.643, valid_ler = 0.108, time = 15.126
+Epoch 122/150, train_cost = 20.058, train_ler = 0.080, valid_cost = 18.091, valid_ler = 0.096, time = 19.043
+Epoch 123/150, train_cost = 17.466, train_ler = 0.059, valid_cost = 16.430, valid_ler = 0.062, time = 22.520
+Epoch 124/150, train_cost = 16.380, train_ler = 0.057, valid_cost = 15.251, valid_ler = 0.053, time = 23.667
+Epoch 125/150, train_cost = 14.863, train_ler = 0.050, valid_cost = 14.307, valid_ler = 0.062, time = 26.387
+Epoch 126/150, train_cost = 14.328, train_ler = 0.045, valid_cost = 13.303, valid_ler = 0.055, time = 24.543
+Epoch 127/150, train_cost = 13.135, train_ler = 0.048, valid_cost = 12.517, valid_ler = 0.047, time = 13.234
+Epoch 128/150, train_cost = 12.666, train_ler = 0.046, valid_cost = 13.546, valid_ler = 0.050, time = 22.591
+Epoch 129/150, train_cost = 23.278, train_ler = 0.091, valid_cost = 19.282, valid_ler = 0.084, time = 16.297
+Epoch 130/150, train_cost = 20.905, train_ler = 0.081, valid_cost = 19.729, valid_ler = 0.110, time = 20.079
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: his slim hands gried the edges of the tablehe made no reply as he waited for whitemore to cophiliproped backn ino hichiri i was oetcoft thegameitewod be easily made
+
+Validation decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: his slim hands gried the edges of the tablehe made no reply as he waited for whitemore to cophiliproped backn ino hichiri i was oetcoft thegameitewod be easily made
+
+Epoch 131/150, train_cost = 21.415, train_ler = 0.072, valid_cost = 17.118, valid_ler = 0.094, time = 14.571
+Epoch 132/150, train_cost = 17.134, train_ler = 0.066, valid_cost = 14.770, valid_ler = 0.071, time = 17.870
+Epoch 133/150, train_cost = 14.992, train_ler = 0.055, valid_cost = 13.161, valid_ler = 0.049, time = 17.649
+Epoch 134/150, train_cost = 13.450, train_ler = 0.047, valid_cost = 13.324, valid_ler = 0.058, time = 20.258
+Epoch 135/150, train_cost = 12.796, train_ler = 0.044, valid_cost = 11.116, valid_ler = 0.044, time = 24.157
+Epoch 136/150, train_cost = 11.920, train_ler = 0.039, valid_cost = 12.147, valid_ler = 0.043, time = 22.329
+Epoch 137/150, train_cost = 13.571, train_ler = 0.060, valid_cost = 14.109, valid_ler = 0.071, time = 18.954
+Epoch 138/150, train_cost = 14.617, train_ler = 0.053, valid_cost = 12.942, valid_ler = 0.056, time = 17.153
+Epoch 139/150, train_cost = 13.048, train_ler = 0.043, valid_cost = 13.270, valid_ler = 0.050, time = 17.681
+Epoch 140/150, train_cost = 12.969, train_ler = 0.050, valid_cost = 11.567, valid_ler = 0.056, time = 21.320
+Train decoding:
+Original: his slim hands gripped the edges of the table he made no reply as he waited for whittemore to continue philip dropped back into his chair if i was out of the game it would be easily made
+Decoded: his slim hands griped the edges of the tablehe made no reply as he waited for whitemore to cophili proped back intohi hairif i was ouet of the game it would be vasily made
+
+Validation decoding:
+Original: macdougall my engineer believes it it is growing every day every hour now you understand you have associated with some of these men
+Decoded: macdougal my enginer believes itit is growing every day every hounow you understandyo ave asociated wih some of hs men
+
+Epoch 141/150, train_cost = 11.982, train_ler = 0.037, valid_cost = 10.482, valid_ler = 0.039, time = 20.237
+Epoch 142/150, train_cost = 10.581, train_ler = 0.031, valid_cost = 9.382, valid_ler = 0.033, time = 19.579
+Epoch 143/150, train_cost = 9.404, train_ler = 0.030, valid_cost = 8.657, valid_ler = 0.032, time = 17.616
+Epoch 144/150, train_cost = 8.575, train_ler = 0.028, valid_cost = 8.136, valid_ler = 0.028, time = 19.359
+Epoch 145/150, train_cost = 8.069, train_ler = 0.025, valid_cost = 7.697, valid_ler = 0.027, time = 20.331
+Epoch 146/150, train_cost = 7.637, train_ler = 0.024, valid_cost = 7.326, valid_ler = 0.024, time = 25.062
+Epoch 147/150, train_cost = 7.269, train_ler = 0.024, valid_cost = 7.015, valid_ler = 0.024, time = 19.376
+Epoch 148/150, train_cost = 6.966, train_ler = 0.024, valid_cost = 6.746, valid_ler = 0.024, time = 18.155
+Epoch 149/150, train_cost = 6.701, train_ler = 0.024, valid_cost = 6.504, valid_ler = 0.024, time = 18.627
+
+C:\Users\Jason Chang\Documents\GitHub\cppai\exp\JC\STT>

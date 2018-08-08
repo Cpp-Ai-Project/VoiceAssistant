@@ -1,7 +1,6 @@
 '''
-<PV-22> Make STT Model 
-STT model that currently implements the LSTM RNN with CTC loss
-Will eventually improve it so it will be Bidirection RNN and more layers
+PV-22 #Make STT Model 
+STT model that implements the LSTM RNN with CTC loss
 
 Used With California Polythechnic University California, Pomona Voice Assitant Project
 Author: Jason Chang
@@ -12,26 +11,22 @@ Date: 10 June, 2018
 import time
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
+import pickle
 import os
-
-#from create_featuresets import create_feature_sets_and_labels
-from create_featuresets import getData
-orginal_path = os.getcwd()
-
-#Currently having problems feeding data with multiple files. 
-#train_x_input, train_x_seq, train_y, test_x_input, test_x_seq, test_y = create_feature_sets_and_labels()
-
-train_x_input, train_x_seq, train_y, test_x_input, test_x_seq, test_y, original = getData()
 
 # Constants
 SPACE_TOKEN = '<space>'
 SPACE_INDEX = 0
 FIRST_INDEX = ord('a') - 1  # 0 is reserved to space
 
-# Some configs
+checkpoint_steps = 10
+
+if not os.path.isdir('./checkpoints'):
+	os.makedirs('./checkpoints')
+
+# Number of input features
 num_features = 26
-# Number of units in the LSTM cell
-num_units=50 
 # Accounting the 0th indice +  space + blank label = 28 characters
 num_classes = ord('z') - ord('a') + 1 + 1 + 1
 
@@ -39,130 +34,199 @@ num_classes = ord('z') - ord('a') + 1 + 1 + 1
 num_epochs = 150
 num_hidden = 50
 num_layers = 1	#For now 1 layer for fast training
-batch_size = 1
+batch_size = 4
+learning_rate = 0.01
+momentum = 0.9
 
-num_examples = 1
-num_batches_per_epoch = int(num_examples/batch_size)
+# Load the data from pickle files
+with open('train_data_batched_Aaron_small.pkl', 'rb') as f:
+	batched_data = pickle.load(f)
+
+# Load original text targets
+with open('original_targets_batched_Aaron_small.pkl', 'rb') as f:
+	original_targets = pickle.load(f)
+
+#batched_data = [[batch_size, batch_features/max_length, 26], batch_targets, batch_seq_len]
+#original_targets = [original text of transcript]
+
+#Gets one the batches
+num_valid_batches = 1
+num_train_batches = len(batched_data) - num_valid_batches
+
+#Valid batch is the last one and Train batches are until last batch
+valid_batches = batched_data[-num_valid_batches:]
+valid_orig_targets = original_targets[-num_valid_batches:]
+train_batches = batched_data[:num_train_batches]
+train_orig_targets = original_targets[:num_train_batches]
+
+del batched_data
+
+###Creating placeholders####
 
 # Has size [batch_size, max_stepsize, num_features], but the batch_size and max_stepsize can vary along each step
-x = tf.placeholder(tf.float32, [None, None, num_features])
+inputs = tf.placeholder(tf.float32, [None, None, num_features])
 # Here we use sparse_placeholder that will generate a SparseTensor required by ctc_loss op.
-y = tf.sparse_placeholder(tf.int32)
+targets = tf.sparse_placeholder(tf.int32)
 # 1d array of size [batch_size]
 seq_len = tf.placeholder(tf.int32, [None])
 
-def recurrent_neural_network(x):
+def test_decoding(sess, decoded, input_feed_dict, input_original):
+	"""
+	Runs the classifier on a feed dictionary and prints the decoded predictions.
+	"""
+
+	d = sess.run(decoded, feed_dict=input_feed_dict)
+
+	str_decoded = ''.join([chr(x) for x in np.asarray(d[0][1]) + FIRST_INDEX])
+	# Replacing blank label to none
+	str_decoded = str_decoded.replace(chr(ord('z') + 1), '')
+	# Replacing space label to space
+	str_decoded = str_decoded.replace(chr(ord('a') - 1), ' ')
+
+	print('Original: %s' % input_original)
+	print('Decoded: %s' % str_decoded)
+	print(' ')
+
+
+def train_neural_network(inputs,targets, seq_len):
+	"""
+	Trains LSTM Recurrent Neural Network using ctc loss
+	Weights are truncated_normal rather than random because truncated normal overcomes saturation of time functions like sigmoid 
+	(where if the value is too big/small [randomm], the neuron stops learning)
+	Uses MomentumOptimizer rather than AdamOptimizer because has faster learning rate
+	Args:
+		inputs: placeholder with size: [None, None, num_features]
+		targets: sparse_placeholder
+		seq_len: placeholder with size: [None]
+
+	Returns:
+		ckpt models, matplotlib plot
+	"""
+
+	#Initializing the Weights and Biases
+	layer = {'weights':tf.Variable(tf.truncated_normal([num_hidden, num_classes], stddev=0.1)),
+			 'biases':tf.Variable(tf.constant(0., shape=[num_classes]))}
+
 	#For creating multi layered RNN cell for later 
 	cells = []
 	for _ in range(num_layers):
-		cell = tf.contrib.rnn.LSTMCell(num_units)
+		cell = tf.contrib.rnn.LSTMCell(num_hidden)
 		cells.append(cell)
 	stack = tf.contrib.rnn.MultiRNNCell(cells)
 
-	#Initializing the Weights and Biases
-	layer = {'weights':tf.Variable(tf.random_normal([num_hidden, num_classes])),
-			 'biases':tf.Variable(tf.random_normal([num_classes]))}
-
 	# The second output is the last state and we will no use that
-	outputs, _ = tf.nn.dynamic_rnn(stack, x, seq_len, dtype=tf.float32)
+	outputs, _ = tf.nn.dynamic_rnn(stack, inputs, seq_len, dtype=tf.float32)
 
-	shape = tf.shape(x)
+	shape = tf.shape(inputs)
 	batch_s, max_timesteps = shape[0], shape[1]
 
-	# Reshaping to apply the same weights over the timesteps
+	#Reshaping to apply the same weights over the timesteps
 	outputs = tf.reshape(outputs, [-1, num_hidden])
-	output = tf.matmul(outputs, layer['weights']) + layer['biases']
 
-	# Reshaping back to the original shape
-	output = tf.reshape(output, [batch_s, -1, num_classes])
+	#Applying linear transform
+	logits = tf.matmul(outputs, layer['weights']) + layer['biases']
 
-	# Time major
-	output = tf.transpose(output, (1, 0, 2))
+	#Reshaping back to the original shape
+	logits = tf.reshape(logits, [batch_s, -1, num_classes])
 
-	return output
+	#Time major: [max_time, batch_size, num_classes]. Required for CTC loss fucntion
+	logits = tf.transpose(logits, (1, 0, 2))
 
-def train_neural_network(x):
-	predition = recurrent_neural_network(x)
-	loss = tf.nn.ctc_loss(y, predition, seq_len)
+	loss = tf.nn.ctc_loss(targets, logits, seq_len)
 	cost = tf.reduce_mean(loss)
-	optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-	# Option 2: tf.nn.ctc_beam_search_decoder
-	# (it's slower but you'll get better results)
-	decoded, log_prob = tf.nn.ctc_greedy_decoder(predition, seq_len)
+	#Slower optimization
+	#optimizer = tf.train.AdamOptimizer().minimize(cost)
+	optimizer = tf.train.MomentumOptimizer(learning_rate=learning_rate, momentum=momentum, use_nesterov=True).minimize(cost)
+
+	#Option 1: (it's slower but you'll get better results)
+	decoded, log_prob = tf.nn.ctc_beam_search_decoder(inputs=logits, sequence_length=seq_len)
+	# Option 2: 
+	#decoded, log_prob = tf.nn.ctc_greedy_decoder(logits, seq_len)
 
 	# Inaccuracy: label error rate
-	ler = tf.reduce_mean(tf.edit_distance(tf.cast(decoded[0], tf.int32), y))
+	ler = tf.reduce_mean(tf.edit_distance(tf.cast(decoded[0], tf.int32), targets))
 
-	#Creating Folder for RNN Model
-	os.chdir(orginal_path)
-	spec_path = os.path.join(orginal_path, 'RNNmodel\\')
-	if not os.path.exists(spec_path):
-		#create the RNNmodel folder if it doesn't already exist
-		os.makedirs(spec_path)
+	points_train_cost = []
+	points_train_ler = []
+	points_valid_cost = []
+	points_valid_ler = []
 
 	saver = tf.train.Saver()
 	init = tf.global_variables_initializer()
 	with tf.Session() as sess:
 		sess.run(init)
-		spec_path = os.path.join(spec_path, 'RNNmodel.ckpt')
 
 		for curr_epoch in range(num_epochs):
-			train_cost = train_ler = 0
 			start = time.time()
-			#i = 0
+			train_cost = train_ler = 0
+			for batch in range(num_train_batches):
 
-			for batch in range(num_batches_per_epoch):
-				'''
-				#Trying with multiple file but getting wrong feed value of shape
-				#ValueError: Cannot feed value of shape (1, 1, 246, 13) for Tensor 'Placeholder:0', which has shape '(?, ?, 13)'
+				#print('Batch {} / {}'.format(batch+1, num_train_batches))
+				#Input is with format of [4, ?(max_time_step), 26]
+				train_feed = {inputs: train_batches[batch][0],
+							  targets: train_batches[batch][1],
+							  seq_len: train_batches[batch][2]}
 
-				start = i
-				end = i + batch_size
-				batch_x_input = np.array(train_x_input[start:end])
-				batch_x_seq = np.array(train_x_seq[start:end])
-				batch_y = np.array(train_y[start:end])
-				feed = {x: batch_x_input,
-						y: batch_y,
-						seq_len: batch_x_seq}
-				'''
+				batch_cost, _ = sess.run([cost, optimizer], train_feed)			#sess.run([optimizer, cost], feed) does not work? works in different code
+				train_cost += batch_cost
+				train_ler += sess.run(ler, feed_dict = train_feed)
 
-				#Input is only one data with format of [?, ?, 26]
-				feed = {x: train_x_input,
-						y: train_y,
-						seq_len: train_x_seq}
+			train_cost /= num_train_batches
+			train_ler /= num_train_batches
+			points_train_cost.append(train_cost)
+			points_train_ler.append(train_ler)
 
-				batch_cost, _ = sess.run([cost, optimizer], feed)			#sess.run([optimizer, cost], feed) does not work? works in different code
-				train_cost += batch_cost * batch_size
-				train_ler += sess.run(ler, feed_dict=feed) * batch_size
-				#i += batch_size
+			valid_cost = valid_ler = 0
+			for batch in range(num_valid_batches):
+				val_feed = {inputs: valid_batches[batch][0],
+							targets: valid_batches[batch][1],
+							seq_len: valid_batches[batch][2]}
 
-			#Saves the model and currently commented cause of time
-			#save_path = saver.save(sess, spec_path)
-			#print("Model saved in path: %s" % save_path) 
+				val_cost, val_ler = sess.run([cost, ler], feed_dict = val_feed)
+				valid_cost += val_cost
+				valid_ler += val_ler
 
-			train_cost /= num_examples
-			train_ler /= num_examples
-
-			#May need to change when doing multiple test values?
-			val_feed = {x: test_x_input,
-						y: test_y,
-						seq_len: test_x_seq}
-
-			val_cost, val_ler = sess.run([cost, ler], feed_dict=val_feed)
+			valid_cost /= num_valid_batches
+			valid_ler /= num_valid_batches
+			points_valid_cost.append(valid_cost)
+			points_valid_ler.append(valid_ler)
 
 			log = "Epoch {}/{}, train_cost = {:.3f}, train_ler = {:.3f}, val_cost = {:.3f}, val_ler = {:.3f}, time = {:.3f}"
-			print(log.format(curr_epoch+1, num_epochs, train_cost, train_ler, val_cost, val_ler, time.time() - start))
+			print(log.format(curr_epoch, num_epochs, train_cost, train_ler, val_cost, val_ler, time.time() - start))
 
-		# Decoding
-		d = sess.run(decoded[0], feed_dict=feed)
-		str_decoded = ''.join([chr(x) for x in np.asarray(d[1]) + FIRST_INDEX])
-		# Replacing blank label to none
-		str_decoded = str_decoded.replace(chr(ord('z') + 1), '')
-		# Replacing space label to space
-		str_decoded = str_decoded.replace(chr(ord('a') - 1), ' ')
+			if curr_epoch % checkpoint_steps == 0:
+				saver.save(sess, './checkpoints/model_VA_small.ckpt')
+				print('Train decoding: ')
 
-		print('Original:\n%s' % original)
-		print('Decoded:\n%s' % str_decoded)
+				train_feed = {inputs: train_batches[0][0],
+							  targets: train_batches[0][1],
+							  seq_len: np.asarray(train_batches[0][2])}
 
-train_neural_network(x)
+				train_original = ' '.join(train_orig_targets[0])
+
+				test_decoding(sess, decoded, train_feed, train_original)
+
+				print('Validation decoding: ')
+
+				val_feed = {inputs: valid_batches[0][0],
+							targets: valid_batches[0][1],
+							seq_len: valid_batches[0][2]}
+
+				valid_original = ' '.join(valid_orig_targets[0])
+				
+				test_decoding(sess, decoded, val_feed, valid_original)
+
+		plt.figure(1)
+		plt.subplot(121)
+		plt.plot(range(len(points_train_cost)), points_train_cost, 'b.', linestyle = '-', linewidth=2)
+		plt.plot(range(len(points_valid_cost)), points_valid_cost, 'g.', linestyle = '-', linewidth=2)
+		plt.title('cost')
+		plt.subplot(122)
+    
+		plt.plot(range(len(points_valid_ler)), points_train_ler, 'b.', linestyle = '-', linewidth=2)
+		plt.plot(range(len(points_train_ler)), points_valid_ler, 'g.', linestyle = '-', linewidth=2)
+		plt.title('ler')
+		plt.show()
+
+train_neural_network(inputs, targets, seq_len)
