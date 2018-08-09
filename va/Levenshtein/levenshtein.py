@@ -113,7 +113,7 @@ def __patia_formulas(tp, fn, fp) :
     :param fp: (false positive)
     :return:
     '''
-
+    
     recall = ( tp / (tp + fn) ) * 100
     precision = ( tp / (tp + fp) ) * 100
     '''
@@ -128,7 +128,7 @@ def __patia_formulas(tp, fn, fp) :
     print("**Accuracy: " + str(accuracy) + "%\n")
     '''
 
-# _____Class Utilities_____
+#______Class Utilities_____
 def __generate_matrix(givenLength, knownLength):
     matrix = numpy.zeros((givenLength , knownLength ), dtype=int)
     for i in range(len(matrix)):
@@ -209,7 +209,8 @@ def __print_known(knownString):
         for i in range(0, len(knownString)):
             print(knownString[i] + " ", end='')
         print()
-
+        
+        
 def __find_path(matrix, alterations_array):
     '''
     :param matrix: (pbv, leven matrix used in calculations)
@@ -301,7 +302,6 @@ def test_it():
     max_array_length = max(len(given_corpus_array), len(known_corpus_array))
     print("\n___Levenshtein_Claculations___")
     int = levenshtein(given_corpus_array, known_corpus_array)
-
 
 
 
