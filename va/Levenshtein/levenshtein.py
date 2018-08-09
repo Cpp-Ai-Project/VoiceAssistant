@@ -12,7 +12,7 @@ Used With California Polytechnic University California, Pomona Voice Assistant P
 Author: Christopher Leal
 Project Manager: Gerry Fernando Patia
 Writing Date: 24 May, 2018
-Finished: ?
+Finished: ~7/9/2018
 '''
 
 #imports
@@ -26,16 +26,22 @@ from colorsys import *
 def levenshtein(givenString, knownString):
     '''
     let me know what you will pass me please so I can handle it here
+
+    the "main" function of the page
+		-utilizes a matrix to calculate the levenshtein distance between the two corpus
+		-prints various statements and calls error calculating methods
+
     :param givenString: (array or string)
     :param knownString:
-    :return:
+    :return: int value of levenshtein value
+        ---will be removed in future updates
     '''
 
-    matrix = generate_matrix(len(givenString)+1, len(knownString)+1)
+    matrix = __generate_matrix(len(givenString) + 1, len(knownString) + 1)
 
     tpCheck = 0
     tp = 0
-    alterations_array = generate_alterations_array(givenString,knownString)
+    alterations_array = __generate_alterations_array(givenString, knownString)
     for i in range(1, len(givenString)+1):
         for j in range(1, len(knownString)+1):
             if givenString[i-1] == knownString[j-1]:
@@ -51,42 +57,43 @@ def levenshtein(givenString, knownString):
 
     #print_key()
     # THIS IS \/ WHERE "BUGS" WILL BE ... WILL TEST AND IMPROVE LATER
-    find_path(matrix, alterations_array)
+    __find_path(matrix, alterations_array)
     #__________
 
     #print("Known: " + knownString)
     print("Given: ", end='')
     #bugs may also \/
-    print_given_with_errors(givenString,knownString,alterations_array)
+    __print_given_with_errors(givenString, knownString, alterations_array)
     #print(matrix)
-    print_known(knownString)
+    __print_known(knownString)
 
 
-    soukoreff_error(matrix[len(givenString)][len(knownString)],
-                    max(len(givenString), len(knownString)))
+    __soukoreff_error(matrix[len(givenString)][len(knownString)],
+                      max(len(givenString), len(knownString)))
     # (tp,fn,fp) \/
-    patia_formulas(tp,len(knownString)-tp,len(givenString)-tp)
+    __patia_formulas(tp, len(knownString) - tp, len(givenString) - tp)
     print(str(matrix[len(givenString)][len(knownString)]) + " )")
 
     if(type(givenString) == list):
         j=0
         for i in range(0, len(alterations_array)):
+            #redundant if statement
             if(alterations_array[i] != 4):
                 if(alterations_array[i] == 3):
-                    levenshtein_single(givenString[j],knownString[j])
+                    __levenshtein_single(givenString[j], knownString[j])
                 j+=1
 
 
     return matrix[len(givenString)][len(knownString)]
 
 
-def levenshtein_single(givenString,knownString):
+def __levenshtein_single(givenString, knownString):
     levenshtein(givenString,knownString)
 
 # _____Error Methods_____
 
 # i need this to be private
-def soukoreff_error(msd, maxCorpusLength) :
+def __soukoreff_error(msd, maxCorpusLength) :
     '''
     :param msd: (pbv, minimum string distance, given from levenshtein)
     :param maxCorpusLength:
@@ -99,7 +106,7 @@ def soukoreff_error(msd, maxCorpusLength) :
     print("( " + str(error) + "%" + ", ", end='')
 
 # i need this to be private
-def patia_formulas(tp, fn, fp) :
+def __patia_formulas(tp, fn, fp) :
     '''
     :param tp: (true positive)
     :param fn: (false negative)
@@ -122,7 +129,7 @@ def patia_formulas(tp, fn, fp) :
     '''
 
 # _____Class Utilities_____
-def generate_matrix(givenLength,knownLength):
+def __generate_matrix(givenLength, knownLength):
     matrix = numpy.zeros((givenLength , knownLength ), dtype=int)
     for i in range(len(matrix)):
         matrix[i][0] = i
@@ -131,13 +138,17 @@ def generate_matrix(givenLength,knownLength):
         matrix[0][i] = i
     return matrix
 
-def generate_alterations_array(givenString, knownString):
+def __generate_alterations_array(givenString, knownString):
     array = numpy.zeros(max(len(givenString),len(knownString)) + 5)
     for i in range(0,5):
         array[i] = 4
     return array
 
 def print_key():
+    '''
+    prints the key for the levenshtein algorithm
+    :return:
+    '''
     print("___KEY___")
     print('\x1b[1;0;0m' + "Given char is correct" + '\x1b[0m')  # bold white
     print('\x1b[1;32;0m' + "Given char needed to be inserted" + '\x1b[0m')  # bold green
@@ -146,15 +157,17 @@ def print_key():
     print("(Error%, Recall, Precision, Corpus Leven. Dist.(Overall Leven.Dist.)) ")
     print("_________")
 
-def print_matrix(matrix):
+def __print_matrix(matrix):
     for i in range(0, len(matrix)):
         for j in range (0, len(matrix[0])):
             print([i][j])
 
 #__________________________________________________________________________
 
-def print_given_with_errors(givenString,knownString, alterations_array):
+def __print_given_with_errors(givenString, knownString, alterations_array):
     '''
+    prints a colored representation of string differences
+
     :param givenString: (pbv, can be either be an array or string)
     :param knownString: (pbv, can either be an array or string)
     :param alterations_array: (pbv, found from find_path() )
@@ -188,22 +201,23 @@ def print_given_with_errors(givenString,knownString, alterations_array):
 
     print()
 
-def print_known(knownString):
+def __print_known(knownString):
     if (type(knownString) != list):
         print("Known: " + knownString)
     else:
         print("Known: ", end='')
         for i in range(0, len(knownString)):
             print(knownString[i] + " ", end='')
+        print()
 
-
-def find_path(matrix,alterations_array):
+def __find_path(matrix, alterations_array):
     '''
     :param matrix: (pbv, leven matrix used in calculations)
     :param alterations_array: (pbr, helps with printing the color changes for 'UI')
     :return:
 
-    finds the shorts path of alterations to change the given_corpus to known_corpus
+    finds the shortest path of alterations using the matrix made in levenshtein(2arg)
+        to change the given_corpus to known_corpus
     '''
     print(matrix)
     i = len(matrix) -1
@@ -285,7 +299,7 @@ def test_it():
 
     print_key()
     max_array_length = max(len(given_corpus_array), len(known_corpus_array))
-    print("___Levenshtein_Claculations___")
+    print("\n___Levenshtein_Claculations___")
     int = levenshtein(given_corpus_array, known_corpus_array)
 
 
@@ -318,11 +332,11 @@ ___Solved___
 
 ___Solved___ the math is perfect its the coloring alg that is being sus
 
-___Solved___output coloration error?
+___Solved___ output coloration error?
 
+___Solved___ known and given message display
+
+___Solved___ single words fix
 _________________________________________________________________________________________________
 
-Todays agenda:
-*fix the known and given message display
-*add/amend the single words fix
 '''
