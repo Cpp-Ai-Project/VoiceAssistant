@@ -1,3 +1,3 @@
 CPP AI Voice Assistant
 
-Development: 2017 - 2018
+Development: Fall 2017 - Spring 2019
